@@ -25,7 +25,6 @@ import com.example.myfoodappfarm.ui.components.Footer
 import com.example.myfoodappfarm.ui.components.Navbar
 import com.example.myfoodappfarm.ui.theme.DarkGradientColors
 import com.example.myfoodappfarm.ui.theme.LightGradientColors
-
 @Composable
 fun BrowseMealKitsPage(navController: NavHostController) {
     val nonVegetarianMeals = listOf(
@@ -37,74 +36,78 @@ fun BrowseMealKitsPage(navController: NavHostController) {
     )
 
     val darkTheme = isSystemInDarkTheme()
-
-    // Choose gradient colors based on the theme
     val gradientColors = if (darkTheme) DarkGradientColors else LightGradientColors
 
-    Column(
+    Box(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = gradientColors
-                )
-            )){
-        Navbar(
-            navController = navController,
-            onAboutClick = { navController.navigate("about_us") },
-            onCartClick = { navController.navigate("cart_page") }
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Image(
-            painter = painterResource(id = R.drawable.main_image),
-            contentDescription = "Featured Meal",
-            contentScale = ContentScale.FillWidth,
+            .background(Brush.verticalGradient(colors = gradientColors))
+    ) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(150.dp)
-                .clip(RoundedCornerShape(8.dp)) // Rounded corners for the image
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .fillMaxSize()
         ) {
-            Button(
-                onClick = { /* Handle non-vegetarian action here, if needed */ },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9DBE8C)),
-                shape = RoundedCornerShape(12.dp), // Rounded corners
-                elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp), // Add elevation
-                modifier = Modifier.padding(8.dp)
+            Navbar(
+                navController = navController,
+                onAboutClick = { navController.navigate("about_us") },
+                onCartClick = { navController.navigate("cart_page") }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.main_image),
+                contentDescription = "Featured Meal",
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
+                    .clip(RoundedCornerShape(8.dp))
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Text(text = "Non - Veg", color = Color.White)
+                Button(
+                    onClick = { /* Handle non-vegetarian action here, if needed */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9DBE8C)),
+                    shape = RoundedCornerShape(12.dp),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    Text(text = "Non - Veg", color = Color.White)
+                }
+                Button(
+                    onClick = { navController.navigate("vegetarian_meal_kits") },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF444444)),
+                    shape = RoundedCornerShape(12.dp),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    Text(text = "Vegetarian", color = Color.White)
+                }
             }
-            Button(
-                onClick = { navController.navigate("vegetarian_meal_kits") },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF444444)),
-                shape = RoundedCornerShape(12.dp), // Rounded corners
-                elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp), // Add elevation
-                modifier = Modifier.padding(8.dp)
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Column(
+                modifier = Modifier
+                    .weight(1f) // Makes content take remaining space, pushing footer down
+                    .verticalScroll(rememberScrollState())
             ) {
-                Text(text = "Vegetarian", color = Color.White)
+                MealKitGrid(nonVegetarianMeals, navController)
             }
+
+            Footer(
+                onExploreClick = { /* Handle Explore Farm click */ },
+                onSavedClick = { /* Handle Saved click */ },
+                onContactClick = { /* Handle Contact Us click */ },
+                modifier = Modifier.fillMaxWidth()
+            )
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        MealKitGrid(nonVegetarianMeals, navController)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Footer(
-            onExploreClick = { /* Handle Explore Farm click */ },
-            onSavedClick = { /* Handle Saved click */ },
-            onContactClick = { /* Handle Contact Us click */ }
-        )
     }
 }
 

@@ -30,37 +30,34 @@ val vegetarianMeals = listOf(
     MealKit("Mushroom Risotto", "Rs. 900.00", 25, R.drawable.mushroom_risotto, listOf("Rice", "Mushrooms", "Broth"), R.drawable.icon_plus)
 )
 
-
 @Composable
-fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifier) {
-    val cartViewModel: CartViewModel = viewModel() // Create the ViewModel instance here
-
-    NavHost(navController = navController, startDestination = "first_page", modifier = modifier) {
-        composable("first_page") {
-            FirstPage(
-                onNavigateToLoginPage = { navController.navigate("login_page") },
-                onNavigateToRegisterPage = { navController.navigate("register_page") }
+fun AppNavigation(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = "login_page", // Set the actual start page here
+        modifier = modifier
+    ) {
+        composable("login_page") {
+            LoginPage(
+                onLoginSuccess = { navController.navigate("landing_page") },
+                onRegisterClick = { navController.navigate("register_page") }
             )
         }
-        composable("login_page") {
-            LoginPage(onLoginClick = { navController.navigate("landing_page") })
-        }
         composable("register_page") {
-            RegisterPage(onRegisterClick = { navController.navigate("login_page") })
+            RegisterPage(onRegisterSuccess = { navController.navigate("login_page") })
         }
         composable("landing_page") { LandingPage(navController) }
         composable("browse_meal_kits") { BrowseMealKitsPage(navController) }
         composable("vegetarian_meal_kits") { VegetarianMealKitsPage(navController) }
         composable("profile") { ProfileScreen(navController) }
-
-        // Pass navController to AboutUsScreen
         composable("about_us") { AboutUsScreen(navController) }
-
-        // Pass navController to CartPage
         composable("cart_page") {
+            val cartViewModel: CartViewModel = viewModel()  // Make sure to instantiate the ViewModel
             CartPage(cartViewModel = cartViewModel, navController = navController)
         }
-
         composable(
             "meal_kit_details/{mealKitName}",
             arguments = listOf(navArgument("mealKitName") { type = NavType.StringType })
@@ -70,9 +67,10 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
                 ?: vegetarianMeals.find { it.name == mealKitName }
 
             if (selectedMealKit != null) {
-                MealKitDetailsPage(mealKit = selectedMealKit, navController = navController, cartViewModel = cartViewModel) // Pass the ViewModel here
+                val cartViewModel: CartViewModel = viewModel()  // Make sure to instantiate the ViewModel
+                MealKitDetailsPage(mealKit = selectedMealKit, navController = navController, cartViewModel = cartViewModel)
             }
         }
+        composable("step_counter_screen") { StepCounterScreen() }
     }
 }
-

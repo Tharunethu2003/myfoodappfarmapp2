@@ -29,9 +29,17 @@ import androidx.navigation.NavHostController
 import com.example.myfoodappfarm.ui.components.Navbar
 import com.example.myfoodappfarm.ui.components.Footer
 import com.example.myfoodappfarm.R
+import com.example.myfoodappfarm.ui.StepCounterViewModel
 import com.example.myfoodappfarm.ui.theme.DarkGradientColors
 import com.example.myfoodappfarm.ui.theme.LightGradientColors
 import com.example.myfoodappfarm.ui.theme.getTextColor
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+
 
 @Composable
 fun LandingPage(navController: NavHostController) {
@@ -42,74 +50,93 @@ fun LandingPage(navController: NavHostController) {
     // Choose gradient colors based on the theme
     val gradientColors = if (darkTheme) DarkGradientColors else LightGradientColors
 
-    Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = gradientColors
-                )
-            )
-    ) {
-        // Navbar
-        Navbar(
-            navController = navController,
-            onAboutClick = { navController.navigate("about_us") }, // Navigates to About Page
-            onCartClick = { navController.navigate("cart_page") }    // Navigates to Cart Page
-        )
-
-        // Main image section
-        Box(
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Main content
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(2.dp),
-            contentAlignment = Alignment.TopStart
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.main_image),
-                    contentDescription = "Featured Meal",
-                    contentScale = ContentScale.FillWidth,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(150.dp)
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = gradientColors
+                    )
                 )
-            }
-        }
-
-        // Scrollable card section (Recipe Cards)
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-            items(3) {
-                RecipeCard(navController)
-                RecipeCard2(navController)
-                RecipeCard3(navController)
-            }
-        }
+            // Navbar
+            Navbar(
+                navController = navController,
+                onAboutClick = { navController.navigate("about_us") }, // Navigates to About Page
+                onCartClick = { navController.navigate("cart_page") }    // Navigates to Cart Page
+            )
 
-        // Popular Recipes Section with cards side by side
-        PopularRecipesSection(recipes = popularRecipes)
+            // Main image section
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(2.dp),
+                contentAlignment = Alignment.TopStart
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.main_image),
+                        contentDescription = "Featured Meal",
+                        contentScale = ContentScale.FillWidth,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(150.dp)
+                    )
+                }
+            }
+
+            // Scrollable card section (Recipe Cards)
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                items(3) {
+                    RecipeCard(navController)
+                    RecipeCard2(navController)
+                    RecipeCard3(navController)
+                }
+            }
+
+            // Popular Recipes Section with cards side by side
+            PopularRecipesSection(recipes = popularRecipes)
+
+            // Why Choose Us Section
+            WhyChooseUsSection()
+        }
 
         // Footer at the bottom
-        Spacer(modifier = Modifier.weight(1f))
-
-        WhyChooseUsSection()
-
-        Spacer(modifier = Modifier.weight(1f))
-
         Footer(
             onExploreClick = { /* Handle Explore Farm click */ },
             onSavedClick = { /* Handle Saved click */ },
-            onContactClick = { /* Handle Contact Us click */ }
+            onContactClick = { /* Handle Contact Us click */ },
+            modifier = Modifier
+                .align(Alignment.BottomCenter) // Align the footer at the bottom
+                .fillMaxWidth()
         )
+
+        // Button for step counter (positioned at the bottom right)
+        Button(
+            onClick = { navController.navigate("step_counter_screen") },
+            modifier = Modifier
+                .padding(16.dp)
+                .offset(y = (-16).dp) // Moves the button upwards by an inch (16.dp)
+                .align(Alignment.BottomEnd)
+        ) {
+            Text(text = "Track Your Steps")
+        }
+
     }
 }
+
+
+
+
 
 @Composable
 fun PopularRecipesSection(recipes: List<Recipe>) {

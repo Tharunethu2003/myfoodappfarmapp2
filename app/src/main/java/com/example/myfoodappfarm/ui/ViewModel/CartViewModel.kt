@@ -17,4 +17,7 @@ class CartViewModel : ViewModel() {
     fun clearCart() {
         cartItems.clear()
     }
+
+
 }
+

@@ -20,38 +20,38 @@ import androidx.compose.ui.unit.sp
 import com.example.myfoodappfarm.R // replace with your actual package name
 
 
-
 @Composable
 fun Footer(
     onExploreClick: () -> Unit,
     onSavedClick: () -> Unit,
-    onContactClick: () -> Unit
+    onContactClick: () -> Unit,
+    modifier: Modifier = Modifier // Add the modifier parameter with a default value
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .background(Color(0xFFABB88C)) // light green background
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
         FooterItem(
-            icon = R.drawable.location, // Assuming you uploaded your icon to res/drawable
+            icon = R.drawable.location, // Replace with your actual icon
             text = "Explore Farm",
             onClick = onExploreClick
         )
         FooterItem(
-            icon = R.drawable.saved, // Replace with appropriate resource
+            icon = R.drawable.saved, // Replace with appropriate icon
             text = "Saved",
             onClick = onSavedClick
         )
         FooterItem(
-            icon = R.drawable.contact_us, // Replace with appropriate resource
+            icon = R.drawable.contact_us, // Replace with appropriate icon
             text = "Contact Us",
             onClick = onContactClick
         )
     }
 }
+
 
 @Composable
 fun FooterItem(icon: Int, text: String, onClick: () -> Unit) {

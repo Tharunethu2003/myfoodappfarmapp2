@@ -168,17 +168,21 @@ fun MealKitDetailsPage(mealKit: MealKit, navController: NavHostController, cartV
 
             Spacer(modifier = Modifier.weight(1f)) // Spacer to push footer down
 
-            // Footer
-            Footer(
-                onExploreClick = { /* Handle Explore click */ },
-                onSavedClick = { /* Handle Saved click */ },
-                onContactClick = { /* Handle Contact Us click */ },
-            )
+            // Footer with animation
+            SlideUpAndFadeInAnimation(delayMillis = 500) { modifier ->
+                Footer(
+                    modifier = modifier, // Apply animation modifier
+                    onExploreClick = { /* Handle Explore click */ },
+                    onSavedClick = { /* Handle Saved click */ },
+                    onContactClick = { /* Handle Contact Us click */ },
+                )
+            }
         }
     }
 }
 
-@Composable
+
+    @Composable
 fun ReviewCard(userName: String, reviewText: String, rating: Float) {
     Column(
         modifier = Modifier

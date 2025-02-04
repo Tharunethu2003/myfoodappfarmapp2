@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -56,11 +57,20 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation ("androidx.navigation:navigation-compose:2.7.0") // or latest version
+    // Add Firebase Authentication SDK
+    implementation ("com.google.firebase:firebase-auth-ktx:23.1.0")
+// Kotlin Coroutines for StateFlow
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
+    // Navigation for Jetpack Compose
+    implementation ("androidx.navigation:navigation-compose:2.5.0")
+    // If not added already, add Firebase BOM
+    implementation (platform("com.google.firebase:firebase-bom:33.8.0"))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

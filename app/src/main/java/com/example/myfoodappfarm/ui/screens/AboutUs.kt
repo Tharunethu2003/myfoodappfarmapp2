@@ -25,111 +25,103 @@ import androidx.navigation.compose.rememberNavController
 import com.example.myfoodappfarm.R
 import com.example.myfoodappfarm.ui.components.Navbar
 import com.example.myfoodappfarm.ui.components.Footer
+
+
 @Composable
 fun AboutUsScreen(navController: NavHostController) {
-    // Check if the system is in dark theme
     val darkTheme = isSystemInDarkTheme()
 
-    // Gradient background colors based on the theme
     val gradientBackground = Brush.verticalGradient(
         colors = if (darkTheme) {
-            listOf(
-                Color(0xFF4B4B4B), // Dark gray at the top for dark theme
-                Color(0xFF1F1F1F)  // Darker gray at the bottom for dark theme
-            )
+            listOf(Color(0xFF4B4B4B), Color(0xFF1F1F1F))
         } else {
-            listOf(
-                Color(0xFFABB88C), // Light green at the top for light theme
-                Color(0xFFFFFFFF)  // White at the bottom for light theme
-            )
+            listOf(Color(0xFFABB88C), Color(0xFFFFFFFF))
         }
     )
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()) // Allow scrolling in case content overflows
             .background(gradientBackground)
     ) {
-        // Navbar for navigation
-        Navbar(
-            navController = navController,
-            onAboutClick = { navController.navigate("about_us") }, // Navigate to About Us (current page)
-            onCartClick = { navController.navigate("cart_page") }    // Navigate to Cart Page
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Title: "About Us"
-        Text(
-            text = "About Us",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = if (darkTheme) Color.White else MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp) // Add horizontal padding only
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Add a placeholder image for visual enhancement
-        Image(
-            painter = painterResource(id = R.drawable.about_us_image), // Replace with actual image resource
-            contentDescription = "About Us Image",
-            contentScale = ContentScale.Crop,
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
-                .clip(MaterialTheme.shapes.medium) // Rounded corners for the image
-                .padding(horizontal = 16.dp) // Add horizontal padding
-        )
+                .fillMaxSize()
+                .padding(bottom = 56.dp) // Ensure space for footer
+                .verticalScroll(rememberScrollState())
+        ) {
+            Navbar(
+                navController = navController,
+                onAboutClick = { navController.navigate("about_us") },
+                onCartClick = { navController.navigate("cart_page") }
+            )
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        // About Us Description 1
-        Text(
-            text = "Welcome to Farm2Plate! We are committed to providing you with the best " +
-                    "healthy meal kits tailored to your dietary preferences and lifestyle. " +
-                    "Our mission is to make healthy eating fun, convenient, and accessible.",
-            fontSize = 18.sp,
-            color = if (darkTheme) Color.LightGray else Color.Black, // Adjust text color based on theme
-            lineHeight = 24.sp,
-            modifier = Modifier.padding(horizontal = 16.dp) // Horizontal padding only
-        )
+            Text(
+                text = "About Us",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = if (darkTheme) Color.White else MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        // About Us Description 2
-        Text(
-            text = "Founded in 2024, our goal is to help you save time in the kitchen " +
-                    "while enjoying nutritious and delicious meals.",
-            fontSize = 16.sp,
-            color = if (darkTheme) Color.LightGray else Color.Black, // Adjust text color based on theme
-            lineHeight = 22.sp,
-            modifier = Modifier.padding(horizontal = 16.dp) // Horizontal padding only
-        )
+            Image(
+                painter = painterResource(id = R.drawable.about_us_image),
+                contentDescription = "About Us Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .clip(MaterialTheme.shapes.medium)
+                    .padding(horizontal = 16.dp)
+            )
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-        // Thank you text
-        Text(
-            text = "Thank you for choosing Farm2Plate for your meal kit delivery needs!",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = if (darkTheme) Color.LightGray else MaterialTheme.colorScheme.secondary, // Adjust text color based on theme
-            modifier = Modifier.padding(horizontal = 16.dp) // Horizontal padding only
-        )
+            Text(
+                text = "Welcome to Farm2Plate! We are committed to providing you with the best healthy meal kits...",
+                fontSize = 18.sp,
+                color = if (darkTheme) Color.LightGray else Color.Black,
+                lineHeight = 24.sp,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
 
-        // Spacer to push footer down
-        Spacer(modifier = Modifier.weight(1f)) // This spacer takes up available space
+            Spacer(modifier = Modifier.height(16.dp))
 
-        // Footer with buttons for additional actions
+            Text(
+                text = "Founded in 2024, our goal is to help you save time in the kitchen while enjoying nutritious meals.",
+                fontSize = 16.sp,
+                color = if (darkTheme) Color.LightGray else Color.Black,
+                lineHeight = 22.sp,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(
+                text = "Thank you for choosing Farm2Plate for your meal kit delivery needs!",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = if (darkTheme) Color.LightGray else MaterialTheme.colorScheme.secondary,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+        }
+
+        // Fixed Footer at Bottom
         Footer(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth(),
             onExploreClick = { /* Handle Explore click */ },
             onSavedClick = { /* Handle Saved click */ },
-            onContactClick = { /* Handle Contact Us click */ },
+            onContactClick = { /* Handle Contact Us click */ }
         )
     }
 }
+
 
 @Preview
 @Composable
