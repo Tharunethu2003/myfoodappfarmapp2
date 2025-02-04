@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryLight">#FFAAD291</color> <!-- Use inverse primary for dark -->
+    <color name="onPrimaryLight">#FF191D16</color> <!-- Use onSurfaceLight for dark -->
+    <color name="primaryContainerLight">#FF072100</color>
+    <color name="onPrimaryContainerLight">#FFC5EFAB</color> <!-- Use primaryContainer for dark -->
+    <color name="secondaryLight">#FF43483E</color> <!-- Use onSurfaceVariant -->
+    <color name="onSecondaryLight">#FFFFFFFF</color>
+    <color name="secondaryContainerLight">#FF131F0D</color> <!-- Use onSurfaceLight -->
+    <color name="onSecondaryContainerLight">#FFD9E7CB</color>
+    <color name="tertiaryLight">#FF3D7878</color> <!-- Adjust as needed for visibility -->
+    <color name="onSurfaceLight">#FFFFFFFF</color> <!-- White for contrast -->
+    <color name="surfaceVariantLight">#FF2E312B</color>
+    <color name="onSurfaceVariantLight">#FFE0E4D6</color> <!-- Adjusted -->
+    <color name="outlineLight">#FFC3C8BB</color> <!-- Light gray for dark mode -->
+    <color name="outlineVariantLight">#FF74796D</color> <!-- Darker gray for dark mode -->
+    <color name="scrimLight">#BF000000</color> <!-- Semi-transparent black -->
+    <color name="inverseSurfaceLight">#FF191D16</color> <!-- Light for dark mode -->
+    <color name="inverseOnSurfaceLight">#FFE0E4D6</color> <!-- Light text -->
+    <color name="inversePrimaryLight">#FF446732</color> <!-- Original primary color for dark -->
+</resources>

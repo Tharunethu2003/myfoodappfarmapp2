@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryLight">#FF446732</color>
+    <color name="onPrimaryLight">#FFFFFFFF</color>
+    <color name="primaryContainerLight">#FFC5EFAB</color>
+    <color name="onPrimaryContainerLight">#FF072100</color>
+    <color name="secondaryLight">#FF55624C</color>
+    <color name="onSecondaryLight">#FFFFFFFF</color>
+    <color name="secondaryContainerLight">#FFD9E7CB</color>
+    <color name="onSecondaryContainerLight">#FF131F0D</color>
+    <color name="tertiaryLight">#FF386666</color>
+    <color name="onSurfaceLight">#FF191D16</color>
+    <color name="surfaceVariantLight">#FFE0E4D6</color>
+    <color name="onSurfaceVariantLight">#FF43483E</color>
+    <color name="outlineLight">#FF74796D</color>
+    <color name="outlineVariantLight">#FFC3C8BB</color>
+    <color name="scrimLight">#FF000000</color>
+    <color name="inverseSurfaceLight">#FF2E312B</color>
+    <color name="inverseOnSurfaceLight">#FFF0F2E7</color>
+    <color name="inversePrimaryLight">#FFAAD291</color>
+</resources>
