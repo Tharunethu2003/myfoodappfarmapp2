@@ -110,6 +110,16 @@ fun LandingPage(navController: NavHostController) {
             WhyChooseUsSection()
         }
 
+        Button(
+            onClick = { navController.navigate("step_counter_screen") },
+            modifier = Modifier
+                .padding(16.dp)
+                .offset(y = (-16).dp) // Moves the button upwards by an inch (16.dp)
+                .align(Alignment.BottomEnd)
+        ) {
+            Text(text = "Track Your Steps")
+        }
+
         // Footer at the bottom
         Footer(
             onExploreClick = { /* Handle Explore Farm click */ },
@@ -121,15 +131,7 @@ fun LandingPage(navController: NavHostController) {
         )
 
         // Button for step counter (positioned at the bottom right)
-        Button(
-            onClick = { navController.navigate("step_counter_screen") },
-            modifier = Modifier
-                .padding(16.dp)
-                .offset(y = (-16).dp) // Moves the button upwards by an inch (16.dp)
-                .align(Alignment.BottomEnd)
-        ) {
-            Text(text = "Track Your Steps")
-        }
+
 
     }
 }

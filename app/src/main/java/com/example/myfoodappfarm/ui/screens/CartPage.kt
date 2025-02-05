@@ -59,7 +59,9 @@ fun CartPage(cartViewModel: CartViewModel, navController: NavHostController) {
         // Checkout Button
         Button(
             onClick = { /* Handle checkout logic */ },
-            modifier = Modifier.width(200.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9DBE8C)) // Green color for the button
         ) {
             Text("Checkout", color = Color.White) // Text color for the button
@@ -68,11 +70,12 @@ fun CartPage(cartViewModel: CartViewModel, navController: NavHostController) {
         // Spacer to push footer to the bottom
         Spacer(modifier = Modifier.weight(1f)) // Takes up remaining space
 
-        // Footer
         Footer(
             onExploreClick = { /* Handle Explore Farm click */ },
             onSavedClick = { /* Handle Saved click */ },
-            onContactClick = { /* Handle Contact Us click */ }
+            onContactClick = { /* Handle Contact Us click */ },
+            modifier = Modifier
+                .fillMaxWidth()
         )
     }
 }

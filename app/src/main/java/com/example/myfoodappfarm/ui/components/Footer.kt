@@ -1,11 +1,11 @@
 package com.example.myfoodappfarm.ui.components
 
-
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,8 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalContext
 import com.example.myfoodappfarm.R // replace with your actual package name
-
 
 @Composable
 fun Footer(
@@ -52,7 +52,6 @@ fun Footer(
     }
 }
 
-
 @Composable
 fun FooterItem(icon: Int, text: String, onClick: () -> Unit) {
     Column(
@@ -70,15 +69,31 @@ fun FooterItem(icon: Int, text: String, onClick: () -> Unit) {
     }
 }
 
+@Composable
+fun FooterLinks() {
+    val context = LocalContext.current
 
-
+    Footer(
+        onExploreClick = {
+            // Open Google Maps link
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://maps.app.goo.gl/sdSkam8vgruJg7YP9"))
+            context.startActivity(intent)
+        },
+        onSavedClick = {
+            // Navigate to "Saved" page (for example)
+            // Replace with your actual navigation logic (this could use NavController)
+            println("Navigating to Saved page...")
+        },
+        onContactClick = {
+            // Open WhatsApp chat link
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/0772174723"))
+            context.startActivity(intent)
+        }
+    )
+}
 
 @Preview
 @Composable
 fun FooterPreview() {
-    Footer(
-        onExploreClick = {},
-        onSavedClick = {},
-        onContactClick = {}
-    )
+    FooterLinks()
 }

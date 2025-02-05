@@ -66,6 +66,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:2.5.0")
     // If not added already, add Firebase BOM
     implementation (platform("com.google.firebase:firebase-bom:33.8.0"))
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)

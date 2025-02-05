@@ -1,14 +1,14 @@
 package com.example.myfoodappfarm.ui.screens
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -40,35 +40,60 @@ fun LoginPage(onLoginSuccess: () -> Unit, onRegisterClick: () -> Unit) {
             }
     }
 
-    Box(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .background(Color(0xFFF1F1F1)) // Background color to lighten the screen
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            // Login Header
+            Text(
+                text = "Welcome Back!",
+                modifier = Modifier.padding(bottom = 32.dp)
+            )
+
             // Email field
-            TextField(
+            OutlinedTextField(
                 value = email.value,
                 onValueChange = { email.value = it },
                 label = { Text("Email") },
-                modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
             )
 
             // Password field
-            TextField(
+            OutlinedTextField(
                 value = password.value,
                 onValueChange = { password.value = it },
                 label = { Text("Password") },
                 visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 24.dp)
             )
 
             // Login Button
-            Button(onClick = { handleLogin() }) {
-                Text("Login")
+            Button(
+                onClick = { handleLogin() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                shape = RoundedCornerShape(12.dp),
+            ) {
+                Text("Login", color = Color.White)
             }
 
             // Register Text Link
-            Spacer(modifier = Modifier.height(16.dp)) // Add some space before the Register text
             Text(
                 text = "Don't have an account? Register here.",
-                modifier = Modifier.clickable { onRegisterClick() }
+                color = Color(0xFF4CAF50),
+                modifier = Modifier.padding(top = 16.dp)
             )
         }
     }
